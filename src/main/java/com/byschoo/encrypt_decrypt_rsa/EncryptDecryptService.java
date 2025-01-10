@@ -35,13 +35,13 @@ public class EncryptDecryptService {
     public String encryptMessage(String plainText) {
 
         try {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-512ANDMGF1PADDING");
-        PublicKey publicKey = (PublicKey) map.get("publicKey");
-        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-        byte[] encrypt = cipher.doFinal(plainText.getBytes());
-        return new String(Base64.getEncoder().encodeToString(encrypt));
+            Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-512ANDMGF1PADDING");
+            PublicKey publicKey = (PublicKey) map.get("publicKey");
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            byte[] encrypt = cipher.doFinal(plainText.getBytes());
+            return new String(Base64.getEncoder().encodeToString(encrypt));
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return "";
     }
@@ -49,13 +49,13 @@ public class EncryptDecryptService {
     public String decryptMessage(String encryptedMessgae) {
 
         try {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-512ANDMGF1PADDING");
-        PrivateKey privateKey = (PrivateKey) map.get("privateKey");
-        cipher.init(Cipher.DECRYPT_MODE, privateKey);
-        byte[] decrypt = cipher.doFinal(Base64.getDecoder().decode(encryptedMessgae));
-        return new String(decrypt);
+            Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-512ANDMGF1PADDING");
+            PrivateKey privateKey = (PrivateKey) map.get("privateKey");
+            cipher.init(Cipher.DECRYPT_MODE, privateKey);
+            byte[] decrypt = cipher.doFinal(Base64.getDecoder().decode(encryptedMessgae));
+            return new String(decrypt);
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
         return "";
     }
